@@ -54,6 +54,7 @@ class Google_Service_ShoppingContent extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
+    $this->rootUrl = 'https://www.googleapis.com/';
     $this->servicePath = 'content/v2/';
     $this->version = 'v2';
     $this->serviceName = 'content';
@@ -173,7 +174,12 @@ class Google_Service_ShoppingContent extends Google_Service
             'custombatch' => array(
               'path' => 'accountshipping/batch',
               'httpMethod' => 'POST',
-              'parameters' => array(),
+              'parameters' => array(
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+              ),
             ),'get' => array(
               'path' => '{merchantId}/accountshipping/{accountId}',
               'httpMethod' => 'GET',
@@ -221,6 +227,10 @@ class Google_Service_ShoppingContent extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
               ),
             ),'update' => array(
               'path' => '{merchantId}/accountshipping/{accountId}',
@@ -235,6 +245,10 @@ class Google_Service_ShoppingContent extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),
@@ -297,7 +311,12 @@ class Google_Service_ShoppingContent extends Google_Service
             'custombatch' => array(
               'path' => 'accounttax/batch',
               'httpMethod' => 'POST',
-              'parameters' => array(),
+              'parameters' => array(
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+              ),
             ),'get' => array(
               'path' => '{merchantId}/accounttax/{accountId}',
               'httpMethod' => 'GET',
@@ -345,6 +364,10 @@ class Google_Service_ShoppingContent extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
               ),
             ),'update' => array(
               'path' => '{merchantId}/accounttax/{accountId}',
@@ -359,6 +382,10 @@ class Google_Service_ShoppingContent extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'dryRun' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),
@@ -837,6 +864,8 @@ class Google_Service_ShoppingContent_Accountshipping_Resource extends Google_Ser
    *
    * @param Google_AccountshippingCustomBatchRequest $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccountshippingCustomBatchResponse
    */
   public function custombatch(Google_Service_ShoppingContent_AccountshippingCustomBatchRequest $postBody, $optParams = array())
@@ -890,6 +919,8 @@ class Google_Service_ShoppingContent_Accountshipping_Resource extends Google_Ser
    * account shipping settings.
    * @param Google_AccountShipping $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccountShipping
    */
   public function patch($merchantId, $accountId, Google_Service_ShoppingContent_AccountShipping $postBody, $optParams = array())
@@ -907,6 +938,8 @@ class Google_Service_ShoppingContent_Accountshipping_Resource extends Google_Ser
    * account shipping settings.
    * @param Google_AccountShipping $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccountShipping
    */
   public function update($merchantId, $accountId, Google_Service_ShoppingContent_AccountShipping $postBody, $optParams = array())
@@ -994,6 +1027,8 @@ class Google_Service_ShoppingContent_Accounttax_Resource extends Google_Service_
    *
    * @param Google_AccounttaxCustomBatchRequest $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccounttaxCustomBatchResponse
    */
   public function custombatch(Google_Service_ShoppingContent_AccounttaxCustomBatchRequest $postBody, $optParams = array())
@@ -1047,6 +1082,8 @@ class Google_Service_ShoppingContent_Accounttax_Resource extends Google_Service_
    * account tax settings.
    * @param Google_AccountTax $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccountTax
    */
   public function patch($merchantId, $accountId, Google_Service_ShoppingContent_AccountTax $postBody, $optParams = array())
@@ -1064,6 +1101,8 @@ class Google_Service_ShoppingContent_Accounttax_Resource extends Google_Service_
    * account tax settings.
    * @param Google_AccountTax $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool dryRun Flag to run the request in dry-run mode.
    * @return Google_Service_ShoppingContent_AccountTax
    */
   public function update($merchantId, $accountId, Google_Service_ShoppingContent_AccountTax $postBody, $optParams = array())
@@ -3376,6 +3415,7 @@ class Google_Service_ShoppingContent_DatafeedStatus extends Google_Collection
   public $itemsTotal;
   public $itemsValid;
   public $kind;
+  public $lastUploadDate;
   public $processingStatus;
   protected $warningsType = 'Google_Service_ShoppingContent_DatafeedStatusError';
   protected $warningsDataType = 'array';
@@ -3420,6 +3460,14 @@ class Google_Service_ShoppingContent_DatafeedStatus extends Google_Collection
   public function getKind()
   {
     return $this->kind;
+  }
+  public function setLastUploadDate($lastUploadDate)
+  {
+    $this->lastUploadDate = $lastUploadDate;
+  }
+  public function getLastUploadDate()
+  {
+    return $this->lastUploadDate;
   }
   public function setProcessingStatus($processingStatus)
   {

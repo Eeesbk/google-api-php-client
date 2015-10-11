@@ -63,6 +63,7 @@ class Google_Service_Books extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
+    $this->rootUrl = 'https://www.googleapis.com/';
     $this->servicePath = 'books/v1/';
     $this->version = 'v1';
     $this->serviceName = 'books';
@@ -987,6 +988,10 @@ class Google_Service_Books extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'maxAllowedMaturityRating' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'categoryId' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -1231,6 +1236,10 @@ class Google_Service_Books extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'maxAllowedMaturityRating' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'association' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -1296,6 +1305,10 @@ class Google_Service_Books extends Google_Service
                   'type' => 'string',
                 ),
                 'source' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'maxAllowedMaturityRating' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1834,8 +1847,9 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
   }
 
   /**
-   * Sets the settings for the user. Unspecified sub-objects will retain the
-   * existing value. (myconfig.updateUserSettings)
+   * Sets the settings for the user. If a sub-object is specified, it will
+   * overwrite the existing sub-object stored in the server. Unspecified sub-
+   * objects will retain the existing value. (myconfig.updateUserSettings)
    *
    * @param Google_Usersettings $postBody
    * @param array $optParams Optional parameters.
@@ -2214,6 +2228,9 @@ class Google_Service_Books_Onboarding_Resource extends Google_Service_Resource
    * Default is en-US if unset.
    * @opt_param string pageToken The value of the nextToken from the previous
    * page.
+   * @opt_param string maxAllowedMaturityRating The maximum allowed maturity
+   * rating of returned volumes. Books with a higher maturity rating are filtered
+   * out.
    * @opt_param string categoryId List of category ids requested.
    * @opt_param string pageSize Number of maximum results per page to be included
    * in the response.
@@ -2384,6 +2401,9 @@ class Google_Service_Books_VolumesAssociated_Resource extends Google_Service_Res
    * @opt_param string locale ISO-639-1 language and ISO-3166-1 country code. Ex:
    * 'en_US'. Used for generating recommendations.
    * @opt_param string source String to identify the originator of this request.
+   * @opt_param string maxAllowedMaturityRating The maximum allowed maturity
+   * rating of returned recommendations. Books with a higher maturity rating are
+   * filtered out.
    * @opt_param string association Association type.
    * @return Google_Service_Books_Volumes
    */
@@ -2449,6 +2469,9 @@ class Google_Service_Books_VolumesRecommended_Resource extends Google_Service_Re
    * @opt_param string locale ISO-639-1 language and ISO-3166-1 country code. Ex:
    * 'en_US'. Used for generating recommendations.
    * @opt_param string source String to identify the originator of this request.
+   * @opt_param string maxAllowedMaturityRating The maximum allowed maturity
+   * rating of returned recommendations. Books with a higher maturity rating are
+   * filtered out.
    * @return Google_Service_Books_Volumes
    */
   public function listVolumesRecommended($optParams = array())
@@ -6077,6 +6100,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   protected $collection_key = 'industryIdentifiers';
   protected $internal_gapi_mappings = array(
   );
+  public $allowAnonLogging;
   public $authors;
   public $averageRating;
   public $canonicalVolumeLink;
@@ -6092,6 +6116,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $infoLink;
   public $language;
   public $mainCategory;
+  public $maturityRating;
   public $pageCount;
   public $previewLink;
   public $printType;
@@ -6105,6 +6130,14 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $title;
 
 
+  public function setAllowAnonLogging($allowAnonLogging)
+  {
+    $this->allowAnonLogging = $allowAnonLogging;
+  }
+  public function getAllowAnonLogging()
+  {
+    return $this->allowAnonLogging;
+  }
   public function setAuthors($authors)
   {
     $this->authors = $authors;
@@ -6200,6 +6233,14 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public function getMainCategory()
   {
     return $this->mainCategory;
+  }
+  public function setMaturityRating($maturityRating)
+  {
+    $this->maturityRating = $maturityRating;
+  }
+  public function getMaturityRating()
+  {
+    return $this->maturityRating;
   }
   public function setPageCount($pageCount)
   {
